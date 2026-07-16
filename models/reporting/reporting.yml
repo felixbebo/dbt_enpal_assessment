@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: rep_sales_funnel_monthly
+    description: Monthly funnel flow summary across deal creation, stage entry, and sales call KPIs. This table shows when deals entered each step over time, not a point-in-time pipeline snapshot.
+    columns:
+      - name: month
+        tests:
+          - not_null
+      - name: kpi_name
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - deals_created
+                  - deals_entered_stage
+      - name: funnel_step
+        tests:
+          - not_null
+      - name: deals_count
+        tests:
+          - not_null

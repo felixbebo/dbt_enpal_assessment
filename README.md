@@ -32,3 +32,11 @@
   &nbsp;&nbsp;&nbsp;Step 9: Renewal/Expansion
 5. Column names of the reporting model: `month`, `kpi_name`, `funnel_step`, `deals_count`
 6. “Git commit” all the changes and create a PR to your forked repo (not the original one). Send your repo link to us.
+
+## What I Added
+
+I kept the original Enpal instructions and added my own documentation and output files so the solution is easier to review and reuse.
+
+- [Source analysis](analysis.md)
+- [DBT model design](dbt_model_design.md)
+- [Funnel export query](report_queries/funnel_progression_monthly.sql)

@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: stg_activity
+    columns:
+      - name: activity_id
+        # Ideally unique, but the raw source contains conflicting duplicates
+        # and we do not have a clear business rule to choose the winner.
+        tests:
+          - not_null
+      - name: deal_id
+        tests:
+          - not_null
+      - name: assigned_to_user
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('postgres_public', 'users')
+                field: id
+  - name: stg_activity_types
+    columns:
+      - name: activity_type_id
+        tests:
+          - not_null
+          - unique
+      - name: activity_type_code
+        tests:
+          - not_null
+  - name: stg_deal_changes
+    columns:
+      - name: deal_id
+        tests:
+          - not_null
+      - name: change_at
+        tests:
+          - not_null
+      - name: changed_field_key
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['add_time', 'user_id', 'stage_id', 'lost_reason']
+  - name: stg_fields
+    columns:
+      - name: field_id
+        tests:
+          - not_null
+          - unique
+      - name: field_key
+        tests:
+          - not_null
+  - name: stg_stages
+    columns:
+      - name: stage_id
+        tests:
+          - not_null
+          - unique
+      - name: stage_name
+        tests:
+          - not_null
+  - name: stg_users
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
+      - name: email
+        tests:
+          - not_null
